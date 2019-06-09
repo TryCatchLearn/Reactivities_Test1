@@ -1,0 +1,92 @@
+[
+    {
+        "id": "7034e838-09cb-4061-8592-f84de14feaae",
+        "title": "Past Activity 1",
+        "description": "Activity 2 months ago",
+        "category": "Drinks",
+        "date": "2019-04-08T11:45:24.930717",
+        "city": "London",
+        "venue": "Pub"
+    },
+    {
+        "id": "eb1292fb-0d53-4fe9-b011-44c73d434429",
+        "title": "Past Activity 2",
+        "description": "Activity 1 month ago",
+        "category": "Culture",
+        "date": "2019-05-08T11:45:24.935563",
+        "city": "Paris",
+        "venue": "The Louvre"
+    },
+    {
+        "id": "59d1352e-f12f-460d-9720-fc1723eb10cf",
+        "title": "Future Activity 1",
+        "description": "Activity 1 month in future",
+        "category": "Music",
+        "date": "2019-07-08T11:45:24.935566",
+        "city": "London",
+        "venue": "Wembly Stadium"
+    },
+    {
+        "id": "795fead9-2476-4995-97e6-da5ee20b95f5",
+        "title": "Future Activity 2",
+        "description": "Activity 2 months in future",
+        "category": "Food",
+        "date": "2019-08-08T11:45:24.935566",
+        "city": "London",
+        "venue": "Jamies Italian"
+    },
+    {
+        "id": "a3cb8ff8-9b6b-4aea-ba19-98a6b810e1b9",
+        "title": "Future Activity 3",
+        "description": "Activity 3 months in future",
+        "category": "Drinks",
+        "date": "2019-09-08T11:45:24.935567",
+        "city": "London",
+        "venue": "Pub"
+    },
+    {
+        "id": "bf7954fa-61cc-4893-957b-5c29574d7b7e",
+        "title": "Future Activity 4",
+        "description": "Activity 4 months in future",
+        "category": "Culture",
+        "date": "2019-10-08T11:45:24.935567",
+        "city": "London",
+        "venue": "British Museum"
+    },
+    {
+        "id": "6c679635-c072-4d82-afbc-b695952e48ff",
+        "title": "Future Activity 5",
+        "description": "Activity 5 months in future",
+        "category": "Drinks",
+        "date": "2019-11-08T11:45:24.935568",
+        "city": "London",
+        "venue": "Punch and Judy"
+    },
+    {
+        "id": "efbcae06-e660-487f-8a12-5fb8231f3411",
+        "title": "Future Activity 6",
+        "description": "Activity 6 months in future",
+        "category": "Music",
+        "date": "2019-12-08T11:45:24.935568",
+        "city": "London",
+        "venue": "O2 Arena"
+    },
+    {
+        "id": "c910ddd2-71fc-4316-b300-3a95f75e1ca8",
+        "title": "Future Activity 7",
+        "description": "Activity 7 months in future",
+        "category": "Travel",
+        "date": "2020-01-08T11:45:24.935569",
+        "city": "Berlin",
+        "venue": "All"
+    },
+    {
+        "id": "2be2beb2-9977-4b1f-855e-19b1d6d80c12",
+        "title": "Future Activity 8",
+        "description": "Activity 8 months in future",
+        "category": "Drinks",
+        "date": "2020-02-08T11:45:24.935569",
+        "city": "London",
+        "venue": "Pub"
+    }
+]
