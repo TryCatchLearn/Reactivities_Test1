@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Image, Button } from 'semantic-ui-react';
 import Activity from '../../../app/models/activity';
+import {format, parseISO} from 'date-fns';
 
 interface IProps {
   activity: Activity;
@@ -15,7 +16,7 @@ const ActivityDetails: React.FC<IProps> = ({activity, setSelectedActivity, setEd
       <Card.Content>
         <Card.Header>{activity.title}</Card.Header>
         <Card.Meta>
-          <span>{activity.date}</span>
+          <span>{format(parseISO(activity.date), 'dd LLL yyyy')}</span>
         </Card.Meta>
         <Card.Description>
           {activity.description}
