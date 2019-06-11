@@ -1,36 +1,50 @@
-import React, { useContext } from 'react';
-import { Card, Image, Button } from 'semantic-ui-react';
-import {format, parseISO} from 'date-fns';
+import React, { useContext, useEffect } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import { Grid} from 'semantic-ui-react';
 import ActivityStore from '../../../app/stores/ActivityStore';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
+import { observer } from 'mobx-react-lite';
+import ActivityDetailedHeader from './ActivityDetailedHeader';
+import ActivityDetailedInfo from './ActivityDetailedInfo';
+import ActivityDetailedChat from './ActivityDetailedChat';
+import ActivityDetailedSidebar from './ActivityDetailedSidebar';
 
-const ActivityDetails: React.FC = () => {
+interface DetailParams {
+  id: string;
+}
+
+const ActivityDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match, history }) => {
   const activityStore = useContext(ActivityStore);
-  const {editFormOpen, cancelSelectActivity, activity} = activityStore;
+  const {
+    activity,
+    loadActivity,
+    loading
+  } = activityStore;
+
+  useEffect(
+    () => {
+      loadActivity(match.params.id, {acceptCached: true})
+    }, [activityStore ,loadActivity, match.params.id]
+  );
+
+  if (loading) return <LoadingComponent content='Loading activity...' />
 
   if (activity) {
     return (
-      <Card fluid>
-        <Image src={`/assets/categoryImages/${activity.category}.jpg`} wrapped ui={false} />
-        <Card.Content>
-          <Card.Header>{activity.title}</Card.Header>
-          <Card.Meta>
-            <span>{format(parseISO(activity.date), 'dd LLL yyyy')}</span>
-          </Card.Meta>
-          <Card.Description>
-            {activity.description}
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <Button.Group widths={2}>
-              <Button basic color='blue' content='Edit' onClick={() => editFormOpen(activity.id)}/>
-              <Button basic color='grey' content='Cancel' onClick={cancelSelectActivity}/>
-          </Button.Group>
-        </Card.Content>
-      </Card>
+      <Grid>
+        <Grid.Column width={10}>
+          <ActivityDetailedHeader activity={activity} />
+          <ActivityDetailedInfo activity={activity} />
+          <ActivityDetailedChat />
+        </Grid.Column>
+        <Grid.Column width={6}>
+          <ActivityDetailedSidebar />
+        </Grid.Column>
+      </Grid>
     );
   } else {
-    return <h2>Activity not found</h2>
+    return <h2>Activity not found</h2>;
   }
 };
 
-export default ActivityDetails;
+export default observer(ActivityDetails);

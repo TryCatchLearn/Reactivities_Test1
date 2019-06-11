@@ -8,14 +8,15 @@ class ActivityStore {
     @observable activity: Activity | null = null;
     @observable editMode = false;
     @observable loadingInitial = false;
+    @observable loading = false;
     @observable submitting = false;
     @observable target: string | null = null;
 
     @computed get activitiesByDate() {
-        return Array.from(this.activityRegistry.values()).sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
+        return this.groupActivitiesByDate(Array.from(this.activityRegistry.values()));
     }
 
-    @action loadActivities() {
+    @action loadActivities = () => {
         this.loadingInitial = true;
         return agent.Activities.list()
             .then((activities) => {
@@ -26,9 +27,27 @@ class ActivityStore {
             .finally(() => this.loadingInitial = false);
     }
 
+    @action loadActivity = (id: string, {acceptCached = true}) => {
+        if (acceptCached) {
+            const activity = this.getActivity(id);
+            if (activity) this.activity = activity;
+            return Promise.resolve(activity);
+        }
+        this.loading = true;
+        return agent.Activities.get(id)
+            .then((activity: Activity) => {
+                this.activityRegistry.set(activity.id, activity);
+                this.activity = activity;
+            })
+            .then((activity) => {
+                return Promise.resolve(activity);
+            })
+            .finally(() => this.loading = false);
+    }
+
     @action createActivity = (activity: Activity) => {
         this.submitting = true;
-        agent.Activities.create(activity)
+         return agent.Activities.create(activity)
             .then(() => {
                 this.activityRegistry.set(activity.id, activity);
                 this.editMode = false;
@@ -38,7 +57,7 @@ class ActivityStore {
 
     @action editActivity = (activity: Activity) => {
         this.submitting = true;
-        agent.Activities.update(activity)
+        return agent.Activities.update(activity)
             .then(() => {
                 this.activityRegistry.set(activity.id, activity);
                 this.editMode = false;
@@ -64,22 +83,21 @@ class ActivityStore {
         this.editMode = false;
     }
 
-    @action cancelSelectActivity = () => {
-        this.activity = null;
+    getActivity = (id: string) => {
+        return this.activityRegistry.get(id);
     }
 
-    @action createFormOpen = () => {
-        this.editMode = true;
-        this.activity = null;
-    }
-
-    @action editFormOpen = (id: string) => {
-        this.activity = this.activityRegistry.get(id);
-        this.editMode = true;
-    }
-
-    @action cancelFormOpen = () => {
-        this.editMode = false;
+    groupActivitiesByDate(activities: Activity[]) {
+        const sortedActivities = activities.sort(
+            (a, b) => Date.parse(a.date) - Date.parse(b.date)
+        );
+        return Object.entries(
+            sortedActivities.reduce((activities, activity) => {
+                const date = activity.date.split('T')[0];
+                activities[date] = activities[date] ? [...activities[date], activity] : [activity];
+                return activities;
+            }, {} as {[key: string]: Activity[]})
+        )
     }
 }
 
