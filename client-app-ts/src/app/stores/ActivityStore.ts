@@ -21,6 +21,7 @@ class ActivityStore {
         return agent.Activities.list()
             .then((activities) => {
                 activities.forEach((activity: Activity) => {
+                    activity.date = new Date(activity.date);
                     this.activityRegistry.set(activity.id, activity);
                 })
             })
@@ -30,12 +31,15 @@ class ActivityStore {
     @action loadActivity = (id: string, {acceptCached = true}) => {
         if (acceptCached) {
             const activity = this.getActivity(id);
-            if (activity) this.activity = activity;
+            if (activity) {
+                this.activity = activity;
+            } 
             return Promise.resolve(activity);
         }
         this.loading = true;
         return agent.Activities.get(id)
             .then((activity: Activity) => {
+                activity.date = new Date(activity.date);
                 this.activityRegistry.set(activity.id, activity);
                 this.activity = activity;
             })
@@ -89,11 +93,11 @@ class ActivityStore {
 
     groupActivitiesByDate(activities: Activity[]) {
         const sortedActivities = activities.sort(
-            (a, b) => Date.parse(a.date) - Date.parse(b.date)
+            (a, b) => a.date.getTime() - b.date.getTime()
         );
         return Object.entries(
             sortedActivities.reduce((activities, activity) => {
-                const date = activity.date.split('T')[0];
+                const date = activity.date.toISOString().split('T')[0];
                 activities[date] = activities[date] ? [...activities[date], activity] : [activity];
                 return activities;
             }, {} as {[key: string]: Activity[]})

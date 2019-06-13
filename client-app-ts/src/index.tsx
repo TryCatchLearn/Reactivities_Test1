@@ -4,6 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import './app/layout/styles.css';
 import App from './app/layout/App';
 import * as serviceWorker from './serviceWorker';
+import dateFnsLocalizer from 'react-widgets-date-fns';
+import 'react-widgets/dist/css/react-widgets.css';
+
+dateFnsLocalizer();
 
 ReactDOM.render(
   <BrowserRouter>

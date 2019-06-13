@@ -5,7 +5,11 @@ export default interface Activity {
     title: string;
     description: string;
     category: string;
-    date: string;
+    date: Date;
     city: string;
     venue: string;
   }
+
+export interface ActivityToCreate extends Partial<Activity> {
+  time?: Date;
+}

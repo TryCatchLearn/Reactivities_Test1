@@ -3,6 +3,7 @@ import { Header } from 'semantic-ui-react';
 import ActivityStore from '../../../app/stores/ActivityStore';
 import { observer } from 'mobx-react-lite';
 import ActivityListItem from './ActivityListItem';
+import {format} from 'date-fns'
 
 const ActivityList: React.FC = () => {
   const activityStore = useContext(ActivityStore);
@@ -13,7 +14,7 @@ const ActivityList: React.FC = () => {
       {activities.map(([group, activities]) => (
         <Fragment key={group}>
           <Header sub color='teal'>
-            {group}
+            {format(new Date(group), 'eeee do LLLL')}
           </Header>
           {activities &&
             activities.map(activity => (

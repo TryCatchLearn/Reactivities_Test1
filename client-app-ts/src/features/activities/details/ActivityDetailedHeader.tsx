@@ -1,7 +1,7 @@
 import React from 'react';
 import { Segment, Image, Item, Header, Button } from 'semantic-ui-react';
 import Activity from '../../../app/models/activity';
-import {format, parseISO} from 'date-fns';
+import {format} from 'date-fns';
 import { Link } from 'react-router-dom';
 
 const eventImageStyle = {
@@ -36,7 +36,7 @@ const ActivityDetailedHeader: React.FC<{activity: Activity}> = ({activity}) => {
                   content={activity.title}
                   style={{ color: 'white' }}
                 />
-                <p>{activity.date && format(parseISO(activity.date), 'dddd do MMMM')}</p>
+                <p>{activity.date && format(activity.date, 'dddd do MMMM')}</p>
                 <p>
                   Hosted by <strong>Bob</strong>
                 </p>
