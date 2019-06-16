@@ -33,8 +33,8 @@ class ActivityStore {
             const activity = this.getActivity(id);
             if (activity) {
                 this.activity = activity;
+                return Promise.resolve(activity);
             } 
-            return Promise.resolve(activity);
         }
         this.loading = true;
         return agent.Activities.get(id)
@@ -46,6 +46,9 @@ class ActivityStore {
             .then((activity) => {
                 return Promise.resolve(activity);
             })
+            .catch(error => {
+                throw error;
+            })
             .finally(() => this.loading = false);
     }
 
@@ -56,6 +59,9 @@ class ActivityStore {
                 this.activityRegistry.set(activity.id, activity);
                 this.editMode = false;
             })
+            .catch((error) => {
+                throw error;
+            })
             .finally(() => this.submitting = false);
     }
 
@@ -65,6 +71,9 @@ class ActivityStore {
             .then(() => {
                 this.activityRegistry.set(activity.id, activity);
                 this.editMode = false;
+            })
+            .catch((error) => {
+                throw error
             })
             .finally(() => this.submitting = false);
     }

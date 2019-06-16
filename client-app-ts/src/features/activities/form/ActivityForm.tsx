@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Button, Form, Segment, Grid } from 'semantic-ui-react';
+import { Button, Form, Segment, Grid, Label } from 'semantic-ui-react';
 import { Form as FinalForm, Field } from 'react-final-form';
 import Activity, { ActivityToCreate } from '../../../app/models/activity';
 import { Guid } from 'guid-typescript';
@@ -18,6 +18,7 @@ import {
   isRequired,
   hasLengthGreaterThan
 } from 'revalidate';
+import { toast } from 'react-toastify';
 
 const validate = combineValidators({
   title: isRequired({ message: 'The event title is required' }),
@@ -46,12 +47,14 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
   const { createActivity, editActivity, loadActivity } = activityStore;
 
   useEffect(() => {
-    loadActivity(match.params.id, { acceptCached: true }).then(activity => {
-      if (activity) {
-        activity.time = activity.date;
-        setActivity(activity);
-      }
-    });
+    if (match.params.id) {
+      loadActivity(match.params.id, { acceptCached: true }).then(activity => {
+        if (activity) {
+          activity.time = activity.date;
+          setActivity(activity);
+        }
+      });
+    }
   }, [activityStore, loadActivity, match.params.id]);
 
   const [activity, setActivity] = useState<ActivityToCreate>({
@@ -74,9 +77,12 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
         ...activity,
         id: Guid.create().toString()
       };
-      createActivity(newActivity).then(() => {
+      createActivity(newActivity).then((response) => {
+        console.log({response})
         history.push(`/activities/${newActivity.id}`);
-      });
+      }).catch((error) => {
+        toast.error('Oops, problem submitting form')
+      })
     } else {
       editActivity(activity).then(() => {
         history.push(`/activities/${activity.id}`);
@@ -92,7 +98,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
             initialValues={activity}
             validate={validate}
             onSubmit={handleFormSubmit}
-            render={({ handleSubmit, invalid, submitting, pristine }) => (
+            render={({ handleSubmit, invalid, submitting, pristine, submitError }) => (
               <Form onSubmit={handleSubmit}>
                 <Field
                   name='title'
@@ -127,7 +133,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
                     time={true}
                     value={activity.date}
                     component={DateInput}
-                    placeholder='Date'
+                    placeholder='Time'
                   />
                 </Form.Group>
                 <Field
@@ -142,8 +148,9 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   component={TextInput}
                   placeholder='Venue'
                 />
+                {submitError && <span>Submit error: {submitError}</span>}
                 <Button
-                  disabled={invalid || pristine}
+                  // disabled={invalid || pristine}
                   type='submit'
                   floated='right'
                   positive

@@ -1,7 +1,20 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse, AxiosError } from 'axios';
 import Activity from '../models/activity';
+import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
+
+axios.interceptors.response.use(undefined, (error: AxiosError) => {
+    if (error && error.response && error.response.status === 400) {
+        throw error.response;
+    }
+    if (error && error.response && error.response.status === 404) {
+        throw error.response;
+    }
+    if (error && error.response && error.response.status === 500) {
+        toast.error(error.response.data.errors);
+    }
+})
 
 const responseBody = (res: AxiosResponse) => res.data;
 
