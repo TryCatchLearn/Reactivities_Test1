@@ -14,6 +14,8 @@
         <e p="Controllers" t="Include">
           <e p="ActivitiesController.cs" t="Include" />
           <e p="BaseController.cs" t="Include" />
+          <e p="PhotosController.cs" t="Include" />
+          <e p="ProfilesController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
           <e p="ValuesController.cs" t="Include" />
         </e>
@@ -33,6 +35,10 @@
         </e>
         <e p="reactivities.db" t="Include" />
         <e p="Startup.cs" t="Include" />
+        <e p="Uploads" t="Include">
+          <e p="72722ce0-1c01-4263-92d4-a420957587a3.jpg" t="Include" />
+          <e p="bat1.jpg" t="Include" />
+        </e>
       </e>
       <e p="Application" t="IncludeRecursive">
         <e p="Activities" t="Include">
@@ -54,6 +60,7 @@
         </e>
         <e p="Interfaces" t="Include">
           <e p="IJwtGenerator.cs" t="Include" />
+          <e p="IPhotoAccessor.cs" t="Include" />
           <e p="IUserAccessor.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
@@ -62,6 +69,16 @@
               <e p="Application.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
+        </e>
+        <e p="Photos" t="Include">
+          <e p="Add.cs" t="Include" />
+          <e p="Delete.cs" t="Include" />
+          <e p="PhotoUploadResult.cs" t="Include" />
+          <e p="SetMain.cs" t="Include" />
+        </e>
+        <e p="Profiles" t="Include">
+          <e p="Details.cs" t="Include" />
+          <e p="Profile.cs" t="Include" />
         </e>
         <e p="Users" t="Include">
           <e p="CurrentUser.cs" t="Include" />
@@ -85,6 +102,7 @@
             </e>
           </e>
         </e>
+        <e p="Photo.cs" t="Include" />
         <e p="UserActivity.cs" t="Include" />
         <e p="Value.cs" t="Include" />
       </e>
@@ -97,6 +115,10 @@
               <e p="Infrastructure.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
+        </e>
+        <e p="Photos" t="Include">
+          <e p="CloudinarySettings.cs" t="Include" />
+          <e p="PhotoAccessor.cs" t="Include" />
         </e>
         <e p="Security" t="Include">
           <e p="IsHostRequirement.cs" t="Include" />
@@ -119,6 +141,8 @@
           <e p="20190616071220_Identity added.Designer.cs" t="Include" />
           <e p="20190618101102_Added useractivity.cs" t="Include" />
           <e p="20190618101102_Added useractivity.Designer.cs" t="Include" />
+          <e p="20190619113722_Photo model added.cs" t="Include" />
+          <e p="20190619113722_Photo model added.Designer.cs" t="Include" />
           <e p="DataContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
