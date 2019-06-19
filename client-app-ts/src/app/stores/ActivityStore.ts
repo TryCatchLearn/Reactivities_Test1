@@ -1,13 +1,19 @@
-import {createContext, SyntheticEvent} from 'react';
+import {SyntheticEvent} from 'react';
 import {observable, action, computed} from 'mobx';
 import agent from '../api/agent';
 import Activity from '../models/activity';
+import { RootStore } from './RootStore';
 
-class ActivityStore {
+export default class ActivityStore {
+    rootStore: RootStore;
+    constructor(rootStore: RootStore) {
+        this.rootStore = rootStore;
+    }
+
     @observable activityRegistry = new Map();
     @observable activity: Activity | null = null;
     @observable editMode = false;
-    @observable loadingInitial = false;
+    @observable loadingInitial = true;
     @observable loading = false;
     @observable submitting = false;
     @observable target: string | null = null;
@@ -17,7 +23,6 @@ class ActivityStore {
     }
 
     @action loadActivities = () => {
-        this.loadingInitial = true;
         return agent.Activities.list()
             .then((activities) => {
                 activities.forEach((activity: Activity) => {
@@ -113,5 +118,3 @@ class ActivityStore {
         )
     }
 }
-
-export default createContext(new ActivityStore())

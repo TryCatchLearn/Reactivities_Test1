@@ -1,23 +1,27 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
-import ActivityStore from '../../../app/stores/ActivityStore';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
-import { observer } from 'mobx-react-lite';
 import ActivityDetailedHeader from './ActivityDetailedHeader';
 import ActivityDetailedInfo from './ActivityDetailedInfo';
 import ActivityDetailedChat from './ActivityDetailedChat';
 import ActivityDetailedSidebar from './ActivityDetailedSidebar';
+import ActivityStore from '../../../app/stores/ActivityStore';
+import { inject, observer } from 'mobx-react';
 
 interface DetailParams {
   id: string;
 }
 
-const ActivityDetails: React.FC<RouteComponentProps<DetailParams>> = ({
+interface IProps extends RouteComponentProps<DetailParams> {
+  activityStore: ActivityStore
+}
+
+const ActivityDetails: React.FC<IProps> = ({
   match,
-  history
+  history,
+  activityStore
 }) => {
-  const activityStore = useContext(ActivityStore);
   const { activity, loadActivity, loading } = activityStore;
 
   useEffect(() => {
@@ -27,7 +31,7 @@ const ActivityDetails: React.FC<RouteComponentProps<DetailParams>> = ({
           history.push('/notfound')
         }
       })
-  }, [activityStore, loadActivity, match.params.id, history]);
+  }, [loadActivity, match.params.id, history]);
 
   if (loading || !activity)
     return <LoadingComponent content='Loading activity...' />;
@@ -45,4 +49,4 @@ const ActivityDetails: React.FC<RouteComponentProps<DetailParams>> = ({
     </Grid>
   );
 };
-export default observer(ActivityDetails);
+export default inject('activityStore')(observer(ActivityDetails));

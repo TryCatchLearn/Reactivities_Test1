@@ -1,9 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Grid } from 'semantic-ui-react';
 import ActivityList from './ActivityList';
 import { observer } from 'mobx-react-lite';
+import { inject } from 'mobx-react';
+import ActivityStore from '../../../app/stores/ActivityStore';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
 
-const ActivityDashboard: React.FC = () => {
+interface IProps {
+  activityStore: ActivityStore
+}
+
+const ActivityDashboard: React.FC<IProps> = ({activityStore}) => {
+  const {loadActivities, loadingInitial} = activityStore;
+
+  useEffect(() => {
+    loadActivities();
+  }, [loadActivities])
+
+  if (loadingInitial) return <LoadingComponent content='Loading activities...' />
 
   return (
     <Grid>
@@ -17,4 +31,4 @@ const ActivityDashboard: React.FC = () => {
   );
 };
 
-export default observer(ActivityDashboard);
+export default inject('activityStore')(observer(ActivityDashboard));

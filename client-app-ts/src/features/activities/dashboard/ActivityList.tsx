@@ -1,13 +1,17 @@
-import React, { useContext, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Header } from 'semantic-ui-react';
-import ActivityStore from '../../../app/stores/ActivityStore';
 import { observer } from 'mobx-react-lite';
 import ActivityListItem from './ActivityListItem';
 import {format} from 'date-fns'
+import { inject } from 'mobx-react';
+import ActivityStore from '../../../app/stores/ActivityStore';
 
-const ActivityList: React.FC = () => {
-  const activityStore = useContext(ActivityStore);
-  const { activitiesByDate: activities } = activityStore;
+interface IProps {
+  activityStore?: ActivityStore
+}
+
+const ActivityList: React.FC<IProps> = ({activityStore}) => {
+  const { activitiesByDate: activities } = activityStore!;
 
   return (
     <Fragment>
@@ -26,4 +30,4 @@ const ActivityList: React.FC = () => {
   );
 };
 
-export default observer(ActivityList);
+export default inject('activityStore')(observer(ActivityList));

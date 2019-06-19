@@ -36,11 +36,16 @@
       </e>
       <e p="Application" t="IncludeRecursive">
         <e p="Activities" t="Include">
+          <e p="ActivityDto.cs" t="Include" />
+          <e p="AttendActivity.cs" t="Include" />
+          <e p="AttendeeDto.cs" t="Include" />
           <e p="Create.cs" t="Include" />
           <e p="Delete.cs" t="Include" />
           <e p="Details.cs" t="Include" />
           <e p="Edit.cs" t="Include" />
           <e p="List.cs" t="Include" />
+          <e p="MappingProfile.cs" t="Include" />
+          <e p="Unattend.cs" t="Include" />
         </e>
         <e p="Application.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
@@ -80,6 +85,7 @@
             </e>
           </e>
         </e>
+        <e p="UserActivity.cs" t="Include" />
         <e p="Value.cs" t="Include" />
       </e>
       <e p="Infrastructure" t="IncludeRecursive">
@@ -93,6 +99,7 @@
           </e>
         </e>
         <e p="Security" t="Include">
+          <e p="IsHostRequirement.cs" t="Include" />
           <e p="JwtGenerator.cs" t="Include" />
           <e p="UserAccessor.cs" t="Include" />
         </e>
@@ -110,6 +117,8 @@
           <e p="20190505121043_Added Activity Model.Designer.cs" t="Include" />
           <e p="20190616071220_Identity added.cs" t="Include" />
           <e p="20190616071220_Identity added.Designer.cs" t="Include" />
+          <e p="20190618101102_Added useractivity.cs" t="Include" />
+          <e p="20190618101102_Added useractivity.Designer.cs" t="Include" />
           <e p="DataContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
