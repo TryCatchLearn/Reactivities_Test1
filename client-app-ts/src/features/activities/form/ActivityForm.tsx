@@ -44,7 +44,7 @@ interface IProps extends RouteComponentProps<DetailParams> {
 }
 
 const ActivityForm: React.FC<IProps> = ({ history, match, activityStore }) => {
-  const { createActivity, editActivity, loadActivity } = activityStore;
+  const { createActivity, editActivity, loadActivity, submitting } = activityStore;
 
   useEffect(() => {
     if (match.params.id) {
@@ -103,7 +103,6 @@ const ActivityForm: React.FC<IProps> = ({ history, match, activityStore }) => {
             render={({
               handleSubmit,
               invalid,
-              submitting,
               pristine,
               submitError
             }) => (
@@ -158,7 +157,7 @@ const ActivityForm: React.FC<IProps> = ({ history, match, activityStore }) => {
                 />
                 {submitError && <span>Submit error: {submitError}</span>}
                 <Button
-                  // disabled={invalid || pristine}
+                  disabled={invalid || pristine}
                   type='submit'
                   floated='right'
                   positive

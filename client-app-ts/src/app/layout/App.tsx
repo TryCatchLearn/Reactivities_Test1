@@ -13,7 +13,6 @@ import ActivityDetails from '../../features/activities/details/ActivityDetails';
 import NotFound from './NotFound';
 import LoginForm from '../../features/users/LoginForm';
 import { inject } from 'mobx-react';
-import ActivityStore from '../stores/ActivityStore';
 import CommonStore from '../stores/CommonStore';
 import UserStore from '../stores/UserStore';
 import ModalContainer from '../common/modals/ModalContainer';

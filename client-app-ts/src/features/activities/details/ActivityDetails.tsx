@@ -14,7 +14,7 @@ interface DetailParams {
 }
 
 interface IProps extends RouteComponentProps<DetailParams> {
-  activityStore: ActivityStore
+  activityStore: ActivityStore;
 }
 
 const ActivityDetails: React.FC<IProps> = ({
@@ -22,29 +22,40 @@ const ActivityDetails: React.FC<IProps> = ({
   history,
   activityStore
 }) => {
-  const { activity, loadActivity, loading } = activityStore;
+  const {
+    activity,
+    loadActivity,
+    loadingInitial,
+    loading,
+    attendActivity,
+    cancelAttendance
+  } = activityStore;
 
   useEffect(() => {
-    loadActivity(match.params.id, { acceptCached: true })
-      .catch((error) => {
-        if (error.status === 404) {
-          history.push('/notfound')
-        }
-      })
+    loadActivity(match.params.id, { acceptCached: true }).catch(error => {
+      if (error.status === 404) {
+        history.push('/notfound');
+      }
+    });
   }, [loadActivity, match.params.id, history]);
 
-  if (loading || !activity)
+  if (loadingInitial || !activity)
     return <LoadingComponent content='Loading activity...' />;
 
   return (
     <Grid>
       <Grid.Column width={10}>
-        <ActivityDetailedHeader activity={activity} />
+        <ActivityDetailedHeader
+          activity={activity}
+          attendActivity={attendActivity}
+          cancelAttendance={cancelAttendance}
+          loading={loading}
+        />
         <ActivityDetailedInfo activity={activity} />
         <ActivityDetailedChat />
       </Grid.Column>
       <Grid.Column width={6}>
-        <ActivityDetailedSidebar />
+        <ActivityDetailedSidebar attendees={activity.attendees} />
       </Grid.Column>
     </Grid>
   );

@@ -63,6 +63,7 @@ namespace Persistence
                             {
                                 AppUserId = "a",
                                 IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(-2)
                             }
                         }
                     },
@@ -80,11 +81,13 @@ namespace Persistence
                             {
                                 AppUserId = "b",
                                 IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(-1)
                             },
                             new UserActivity
                             {
                                 AppUserId = "a",
                                 IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(-1)
                             },
                         }
                     },
@@ -102,11 +105,13 @@ namespace Persistence
                             {
                                 AppUserId = "b",
                                 IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(1)
                             },
                             new UserActivity
                             {
                                 AppUserId = "a",
                                 IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(1)
                             },
                         }
                     },
@@ -124,11 +129,13 @@ namespace Persistence
                             {
                                 AppUserId = "c",
                                 IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(2)
                             },
                             new UserActivity
                             {
                                 AppUserId = "a",
                                 IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(2)
                             },
                         }
                     },
@@ -146,11 +153,13 @@ namespace Persistence
                             {
                                 AppUserId = "b",
                                 IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(3)
                             },
                             new UserActivity
                             {
                                 AppUserId = "c",
                                 IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(3)
                             },
                         }
                     },
@@ -168,6 +177,7 @@ namespace Persistence
                             {
                                 AppUserId = "a",
                                 IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(4)
                             }
                         }
                     },
@@ -185,11 +195,13 @@ namespace Persistence
                             {
                                 AppUserId = "c",
                                 IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(5)
                             },
                             new UserActivity
                             {
                                 AppUserId = "b",
                                 IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(5)
                             },
                         }
                     },
@@ -207,11 +219,13 @@ namespace Persistence
                             {
                                 AppUserId = "a",
                                 IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(6)
                             },
                             new UserActivity
                             {
                                 AppUserId = "b",
                                 IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(6)
                             },
                         }
                     },
@@ -229,11 +243,13 @@ namespace Persistence
                             {
                                 AppUserId = "a",
                                 IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(7)
                             },
                             new UserActivity
                             {
                                 AppUserId = "c",
                                 IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(7)
                             },
                         }
                     },
@@ -251,11 +267,13 @@ namespace Persistence
                             {
                                 AppUserId = "b",
                                 IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(8)
                             },
                             new UserActivity
                             {
                                 AppUserId = "a",
                                 IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(8)
                             },
                         }
                     }

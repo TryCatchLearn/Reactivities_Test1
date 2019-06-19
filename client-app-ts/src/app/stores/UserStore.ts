@@ -9,7 +9,7 @@ export default class UserStore {
     this.rootStore = rootStore;
   }
   @observable loading = false;
-  @observable user: any = null;
+  @observable user: IUser | null = null;
 
   @computed get isLoggedIn() {
     return !!this.user;

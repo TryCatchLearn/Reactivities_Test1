@@ -1,23 +1,36 @@
 import React from 'react';
 import { Segment, Image, Item, Header, Button } from 'semantic-ui-react';
 import Activity from '../../../app/models/activity';
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import { observer } from 'mobx-react';
 
 const eventImageStyle = {
-    filter: "brightness(30%)"
-  };
-  
-  const eventImageTextStyle = {
-    position: "absolute",
-    bottom: "5%",
-    left: "5%",
-    width: "100%",
-    height: "auto",
-    color: "white"
-  };
+  filter: 'brightness(30%)'
+};
 
-const ActivityDetailedHeader: React.FC<{activity: Activity}> = ({activity}) => {
+const eventImageTextStyle = {
+  position: 'absolute',
+  bottom: '5%',
+  left: '5%',
+  width: '100%',
+  height: 'auto',
+  color: 'white'
+};
+
+interface IProps {
+  activity: Activity,
+  loading: boolean,
+  attendActivity: () => void,
+  cancelAttendance: () => void
+}
+
+const ActivityDetailedHeader: React.FC<IProps> = ({
+  activity,
+  attendActivity,
+  cancelAttendance,
+  loading
+}) => {
   return (
     <Segment.Group>
       <Segment basic attached='top' style={{ padding: '0' }}>
@@ -46,19 +59,23 @@ const ActivityDetailedHeader: React.FC<{activity: Activity}> = ({activity}) => {
         </Segment>
       </Segment>
       <Segment clearing attached='bottom'>
-        <Button color='teal'>Join Activity</Button>
-        <Button>Cancel attendance</Button>
-        <Button
-          as={Link}
-          to={`/manage/${activity.id}`}
-          color='orange'
-          floated='right'
-        >
-          Manage Event
-        </Button>
+        {activity.isHost ? (
+          <Button
+            as={Link}
+            to={`/manage/${activity.id}`}
+            color='orange'
+            floated='right'
+          >
+            Manage Event
+          </Button>
+        ) : activity.isGoing ? (
+          <Button onClick={cancelAttendance} loading={loading}>Cancel attendance</Button>
+        ) : (
+          <Button onClick={attendActivity} loading={loading} color='teal'>Join Activity</Button>
+        )}
       </Segment>
     </Segment.Group>
   );
 };
 
-export default ActivityDetailedHeader;
+export default observer(ActivityDetailedHeader)

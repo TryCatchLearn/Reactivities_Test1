@@ -24,7 +24,7 @@ const NavBar: React.FC<IProps> = ({userStore}) => {
             <Button as={Link} to='/createActivity' positive content='Create Activity' />
         </Menu.Item>
 
-        {isLoggedIn &&
+        {isLoggedIn && user &&
         <Menu.Item position='right'>
           <Image avatar spaced='right' src={user.image || '/assets/user.png'} />
           <Dropdown pointing='top left' text={user.displayName}>

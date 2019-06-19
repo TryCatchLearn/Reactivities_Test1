@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Label } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 import { Form as FinalForm, Field } from 'react-final-form';
 import TextInput from '../../app/common/form/TextInput';
 import { FORM_ERROR } from 'final-form';
@@ -7,7 +7,6 @@ import { inject, observer } from 'mobx-react';
 import UserStore from '../../app/stores/UserStore';
 import { combineValidators, isRequired } from 'revalidate';
 import ErrorMessage from '../../app/common/form/ErrorMessage';
-import { IUserForLogin } from '../../app/models/user';
 
 interface IProps {
   userStore?: UserStore;

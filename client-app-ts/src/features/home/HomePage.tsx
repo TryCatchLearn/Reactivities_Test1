@@ -27,7 +27,7 @@ const HomePage: React.FC<IProps> = ({ userStore, modalStore }) => {
           />
           Reactivities
         </Header>
-        {isLoggedIn ? (
+        {isLoggedIn && user ? (
           <Fragment>
             <Header
               as='h2'
