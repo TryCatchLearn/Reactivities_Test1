@@ -16,6 +16,7 @@ import { inject } from 'mobx-react';
 import CommonStore from '../stores/CommonStore';
 import UserStore from '../stores/UserStore';
 import ModalContainer from '../common/modals/ModalContainer';
+import ProfilePage from '../../features/profiles/ProfilePage';
 
 interface IProps extends RouteComponentProps {
   commonStore?: CommonStore,
@@ -52,6 +53,7 @@ const App: React.FC<IProps> = ({location, commonStore, userStore}) => {
                 <Route exact path='/activities' component={ActivityDashboard} />
                 <Route path='/activities/:id' component={ActivityDetails} />
                 <Route path={['/createActivity', '/manage/:id']} component={ActivityForm} />
+                <Route path='/profile/:username' component={ProfilePage} />
                 <Route path='/login' component={LoginForm} />
                 <Route component={NotFound} />
               </Switch>
