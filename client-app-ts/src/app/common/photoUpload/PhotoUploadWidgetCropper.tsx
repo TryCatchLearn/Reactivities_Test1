@@ -1,4 +1,4 @@
-import React, { useRef, RefObject } from 'react';
+import React, { useRef } from 'react';
 import 'cropperjs/dist/cropper.css';
 import ReactCropper from 'react-cropper';
 
