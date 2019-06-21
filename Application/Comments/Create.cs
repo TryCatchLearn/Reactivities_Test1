@@ -3,7 +3,6 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Errors;
-using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using FluentValidation;
@@ -34,7 +33,6 @@ namespace Application.Comments
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
-            private readonly IUserAccessor _userAccessor;
 
             public Handler(DataContext context, IMapper mapper)
             {

@@ -14,6 +14,7 @@
         <e p="Controllers" t="Include">
           <e p="ActivitiesController.cs" t="Include" />
           <e p="BaseController.cs" t="Include" />
+          <e p="FollowersController.cs" t="Include" />
           <e p="PhotosController.cs" t="Include" />
           <e p="ProfilesController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
@@ -66,6 +67,11 @@
         <e p="Errors" t="Include">
           <e p="RestException.cs" t="Include" />
         </e>
+        <e p="Followers" t="Include">
+          <e p="Add.cs" t="Include" />
+          <e p="Delete.cs" t="Include" />
+          <e p="List.cs" t="Include" />
+        </e>
         <e p="Interfaces" t="Include">
           <e p="IJwtGenerator.cs" t="Include" />
           <e p="IPhotoAccessor.cs" t="Include" />
@@ -87,7 +93,10 @@
         <e p="Profiles" t="Include">
           <e p="Details.cs" t="Include" />
           <e p="Edit.cs" t="Include" />
+          <e p="IProfileReader.cs" t="Include" />
+          <e p="MappingProfile.cs" t="Include" />
           <e p="Profile.cs" t="Include" />
+          <e p="ProfileReader.cs" t="Include" />
         </e>
         <e p="Users" t="Include">
           <e p="CurrentUser.cs" t="Include" />
@@ -114,6 +123,7 @@
         </e>
         <e p="Photo.cs" t="Include" />
         <e p="UserActivity.cs" t="Include" />
+        <e p="UserFollowings.cs" t="Include" />
         <e p="Value.cs" t="Include" />
       </e>
       <e p="Infrastructure" t="IncludeRecursive">
@@ -157,6 +167,8 @@
           <e p="20190620091917_Bio added.Designer.cs" t="Include" />
           <e p="20190620112605_Added comment entity.cs" t="Include" />
           <e p="20190620112605_Added comment entity.Designer.cs" t="Include" />
+          <e p="20190621014340_User followings.cs" t="Include" />
+          <e p="20190621014340_User followings.Designer.cs" t="Include" />
           <e p="DataContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
