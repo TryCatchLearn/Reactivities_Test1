@@ -4,6 +4,7 @@ import agent from '../api/agent';
 import Activity, { Attendee } from '../models/activity';
 import { RootStore } from './RootStore';
 import { setActivityProps, createAttendee } from '../common/util/util';
+import { HubConnectionBuilder, LogLevel, HubConnection } from '@aspnet/signalr';
 import { toast } from 'react-toastify';
 
 export default class ActivityStore {
@@ -18,11 +19,46 @@ export default class ActivityStore {
   @observable loading = false;
   @observable submitting = false;
   @observable target: string | null = null;
+  @observable.ref hubConnection: HubConnection | null = null;
 
   @computed get activitiesByDate() {
     return this.groupActivitiesByDate(
       Array.from(this.activityRegistry.values())
     );
+  }
+
+  @action createHubConnection = () => {
+    this.hubConnection = new HubConnectionBuilder()
+      .withUrl('http://localhost:5000/chat', {
+        accessTokenFactory: () => this.rootStore.commonStore.token!
+      })
+      .configureLogging(LogLevel.Information)
+      .build();
+
+    this.hubConnection
+      .start()
+      .then(() => {
+        console.log(this.hubConnection!.state);
+      })
+      .catch(error => console.log('Error establishing connection: ', error));
+
+    this.hubConnection.on('ReceiveComment', comment => {
+      this.activity!.comments.push(comment)
+    });
+  };
+
+  @action stopHubConnection = () => {
+    this.hubConnection!.stop();
+  }
+
+  @action addComment = (values: any) => {
+    values.id = this.activity!.id;
+    console.log(values);
+    return this.hubConnection!
+      .invoke('SendComment', values)
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   @action loadActivities = () => {
@@ -66,9 +102,9 @@ export default class ActivityStore {
     this.submitting = true;
     const attendee = createAttendee(this.rootStore.userStore.user!);
     attendee.isHost = true;
-    let attendees: Attendee[] = []
+    let attendees: Attendee[] = [];
     attendees.push(attendee);
-    activity.attendees = attendees
+    activity.attendees = attendees;
     return agent.Activities.create(activity)
       .then(() => {
         activity.isGoing = true;

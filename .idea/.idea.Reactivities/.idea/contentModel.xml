@@ -34,6 +34,9 @@
           <e p="launchSettings.json" t="Include" />
         </e>
         <e p="reactivities.db" t="Include" />
+        <e p="SignalR" t="Include">
+          <e p="ChatHub.cs" t="Include" />
+        </e>
         <e p="Startup.cs" t="Include" />
         <e p="Uploads" t="Include">
           <e p="72722ce0-1c01-4263-92d4-a420957587a3.jpg" t="Include" />
@@ -55,6 +58,11 @@
         </e>
         <e p="Application.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="Comments" t="Include">
+          <e p="CommentDto.cs" t="Include" />
+          <e p="Create.cs" t="Include" />
+          <e p="MappingProfile.cs" t="Include" />
+        </e>
         <e p="Errors" t="Include">
           <e p="RestException.cs" t="Include" />
         </e>
@@ -95,6 +103,7 @@
         <e p="Activity.cs" t="Include" />
         <e p="AppUser.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="Comment.cs" t="Include" />
         <e p="Domain.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -146,6 +155,8 @@
           <e p="20190619113722_Photo model added.Designer.cs" t="Include" />
           <e p="20190620091917_Bio added.cs" t="Include" />
           <e p="20190620091917_Bio added.Designer.cs" t="Include" />
+          <e p="20190620112605_Added comment entity.cs" t="Include" />
+          <e p="20190620112605_Added comment entity.Designer.cs" t="Include" />
           <e p="DataContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">

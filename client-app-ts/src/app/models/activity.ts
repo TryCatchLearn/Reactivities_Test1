@@ -11,7 +11,8 @@ export default interface Activity {
     isGoing: boolean;
     isHost: boolean;
     host?: Attendee;
-    attendees: Attendee[]
+    attendees: Attendee[];
+    comments: IComment[];
   }
 
 export interface ActivityToCreate extends Partial<Activity> {
@@ -24,4 +25,13 @@ export interface Attendee {
   image: string;
   isHost: boolean;
   dateJoined: Date
+}
+
+export interface IComment {
+  id: number;
+  createdAt: Date;
+  body: string;
+  username: string;
+  displayName: string;
+  image: string;
 }
